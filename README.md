@@ -1,6 +1,6 @@
 # docker-azure-pipeline
 
-## [Mini Project](https://github.com/RustyTake-Off/docker-azure-pipeline)
+## [Projects](https://github.com/RustyTake-Off/projects)
 
 [Mini Project] - Create a pipeline that builds a Docker image and pushes it to Azure Container Registry or Docker Hub.
 
