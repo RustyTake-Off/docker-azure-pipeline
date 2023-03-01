@@ -1,0 +1,42 @@
+####################################################################################################
+# Azure DevOps Pipeline
+name: $(BuildDefinitionName)_$(date:yyyyMMdd)$(rev:.r)
+
+# Triggers
+trigger: none # Disable CI builds entirely.
+
+# Pull Request Triggers
+pr: none # Disable pull request triggers.
+
+# Pipeline Variables
+variables:
+  - name: ACR_REPOSITORY_NAME
+    value: "acrdcazpro04"
+  - name: DOCKERFILE
+    value: "$(Build.SourcesDirectory)/app/Dockerfile"
+  - name: ACR_SC_NAME # Service Connection name
+    value: "scacrdcazpro04"
+  - name: VM_IMAGE
+    value: "ubuntu-latest"
+
+stages:
+  # Build and Push Stage
+  - stage: build_push_stage
+    displayName: "Build and Push Stage"
+    pool:
+      vmImage: ${{ variables.VM_IMAGE }}
+
+    jobs:
+      - job: build_push_job
+        displayName: Build job
+
+        steps:
+          - task: Docker@2
+            name: build_push_task
+            displayName: "Build and push image to ACR"
+            inputs:
+              command: buildAndPush
+              containerRegistry: ${{ variables.ACR_SC_NAME }}
+              repository: ${{ variables.ACR_REPOSITORY_NAME }}
+              dockerfile: ${{ variables.DOCKERFILE }}
+              tags: $(Build.BuildId)

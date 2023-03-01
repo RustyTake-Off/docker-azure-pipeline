@@ -1,5 +1,8 @@
+####################################################################################################
+# GitHub Actions Pipeline
 name: "Build Docker Image and push it to ACR"
 
+# Triggers
 on:
   push:
     branches:
@@ -13,6 +16,7 @@ on:
       - "app/Dockerfile"
   workflow_dispatch:
 
+# Pipeline Variables
 env:
   AZURE_CONTAINER_REGISTRY: "acrdcazpro04"
   ACR_CONTAINER_NAME: "contnamedcazpro04"
