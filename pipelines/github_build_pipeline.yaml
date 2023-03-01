@@ -1,0 +1,57 @@
+name: "Build Docker Image and push it to ACR"
+
+on:
+  push:
+    branches:
+      - main
+    path:
+      - "app/Dockerfile"
+  pull_request:
+    branches:
+      - main
+    path:
+      - "app/Dockerfile"
+  workflow_dispatch:
+
+env:
+  AZURE_CONTAINER_REGISTRY: "acrdcazpro05"
+  ACR_CONTAINER_NAME: "contnamedcazpro05"
+  # DOCKERIO: ""
+  # DOCKERIO_CONTAINER_NAME: ""
+
+jobs:
+  build-and-push:
+    name: "Build the Docker image and push to ACR"
+    runs-on: ubuntu-latest
+    environment: demo
+    steps:
+      - name: "Checkout Repository"
+        uses: actions/checkout@v3
+
+      # Build and push to Azure Container Registry
+      - uses: azure/docker-login@v1
+        with:
+          login-server: ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io
+          username: ${{ secrets.ACR_USERNAME }}
+          password: ${{ secrets.ACR_PASSWORD }}
+
+      - name: "Build and push image to ACR"
+        uses: docker/build-push-action@v4.0.0
+        with:
+          push: true
+          tags: ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.ACR_CONTAINER_NAME }}:${{ github.sha }}
+          file: app/Dockerfile
+
+      # Build and push to Docker Hub
+      # - uses: azure/docker-login@v1
+      #   with:
+      #     login-server: ${{ env.DOCKERIO }}.docker.io
+      #     username: ${{ secrets.DOCKERIO_USERNAME }}
+      #     password: ${{ secrets.DOCKERIO_PASSWORD }}
+
+      # - name: "Build and push image to DockerIO"
+      #   uses: docker/build-push-action@v4.0.0
+      #   with:
+      #     push: true
+      #     tags: ${{ env.DOCKERIO }}.docker.io/${{ env.DOCKERIO_CONTAINER_NAME }}:${{ github.sha }}
+      #     file: app/Dockerfile
