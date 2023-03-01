@@ -11,13 +11,13 @@ Create Azure resources:
 * Resource Group
 
 ```bash
-az group create --name "rgdcazpro05" --location "westeurope"
+az group create --name "rgdcazpro04" --location "westeurope"
 ```
 
 * Azure Container Registry
 
 ```bash
-az acr create --name "acrdcazpro05" --resource-group "rgdcazpro05" --sku Basic --admin-enabled
+az acr create --name "acrdcazpro04" --resource-group "rgdcazpro04" --sku Basic --admin-enabled true
 ```
 
 or run the **prerequisites.sh** script.

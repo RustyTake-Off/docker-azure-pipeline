@@ -14,8 +14,8 @@ on:
   workflow_dispatch:
 
 env:
-  AZURE_CONTAINER_REGISTRY: "acrdcazpro05"
-  ACR_CONTAINER_NAME: "contnamedcazpro05"
+  AZURE_CONTAINER_REGISTRY: "acrdcazpro04"
+  ACR_CONTAINER_NAME: "contnamedcazpro04"
   # DOCKERIO: ""
   # DOCKERIO_CONTAINER_NAME: ""
 
