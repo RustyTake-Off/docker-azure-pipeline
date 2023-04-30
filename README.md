@@ -4,7 +4,7 @@ Remember to look around all the folders, files and change things to your own lik
 
 ## [Projects](https://github.com/RustyTake-Off/projects)
 
-[Project] - Create a pipeline that builds a Docker image and pushes it to Azure Container Registry or Docker Hub.
+Create a pipeline that builds a Docker image and pushes it to Azure Container Registry or Docker Hub.
 
 ## Prerequisites
 
